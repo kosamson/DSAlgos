@@ -1,3 +1,5 @@
+/* Custom implementation of the Map interface using a linked-node structure. Performs most operations in O(n) time complexity. */
+
 public class MyMap<T1, T2> {
     private MapNode<T1, T2> head;
 
