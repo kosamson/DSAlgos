@@ -1,4 +1,6 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class CardDeck {
@@ -27,15 +29,12 @@ public class CardDeck {
         SPADE;
     }
 
-    private Card[] cards = new Card[NUM_CARDS];
+    private Deque<Card> cards = new ArrayDeque<Card>();
 
     public CardDeck() {
-        int arrayIndex = 0;
-
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
-                cards[arrayIndex] = new Card(suit, rank);
-                arrayIndex += 1;
+                cards.add(new Card(suit, rank));
             }
         }
     }
@@ -46,6 +45,9 @@ public class CardDeck {
         for (int i = 0; i < NUM_CARDS; i++) {
             indices.add(i);
         }
+
+
+        Card[] cards = new Card[NUM_CARDS];
         
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
@@ -55,13 +57,17 @@ public class CardDeck {
                 indices.remove(indicesIdx);
             }
         }
+
+        for (Card card : cards) {
+            this.cards.add(card);
+        }
     }
 
     public String toString() {
         String retVal = "";
 
-        for (Card card : this.cards) {
-            retVal += card + "\n";
+        for (Object card : this.cards.toArray()) {
+            retVal += (Card) card + "\n";
         }
 
         return retVal;
